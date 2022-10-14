@@ -69,6 +69,13 @@ public class UnitTest1
     [InlineData(Expressions.Français.AuRevoir)]
     public void FermetureTest(string auRevoir)
     {
+        var pleinOhce = new OhceGenerator().Generate();
+
+        foreach (var ohce1 in pleinOhce)
+        {
+            Console.WriteLine();
+        }
+
         // ETANT DONNE un utilisateur parlant une langue
         var ohce = new OhceBuilder()
             .AyantPourFormuleDAdieu(auRevoir)
