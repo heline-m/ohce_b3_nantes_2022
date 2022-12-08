@@ -1,3 +1,4 @@
+using Moq;
 using OHCE.Langues;
 using OHCE.Test.xUnit.Utilities;
 using OHCE.Test.xUnit.Utilities.Builders;
@@ -12,6 +13,14 @@ public class UnitTest1
     public void MiroirTest()
     {
         var ohce = OhceBuilder.Default;
+
+        var langue = Mock.Of<ILangue>(m => m.BienDit == "Cheh" && m.AuRevoir == "Farewell");
+
+        var mock = new Mock<ILangue>();
+        mock.Setup(m => m.AuRevoir).Returns("Farewell");
+        mock.Setup(m => m.BienDit).Returns("Cheh");
+        var langue2 = mock.Object;
+
 
         // QUAND on entre une chaîne de caractère
         var sortie = ohce.Palindrome("toto");
