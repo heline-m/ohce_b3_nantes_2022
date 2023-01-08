@@ -19,8 +19,9 @@ namespace OHCE
         public static class English
         {
             public const string BienDit = "Well said";
-            public const string Bonjour = "Hello";
+            public const string Bonjour = "Good morning";
             public const string AuRevoir = "Goodbye";
+            public const string Bonsoir = "Good evening";
         }
     }
 }
