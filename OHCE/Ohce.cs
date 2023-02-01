@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Numerics;
+using System.Text;
 
 namespace OHCE;
 
@@ -9,7 +11,6 @@ public class Ohce
 
     public Ohce()
     {
-       
     }
 
     public string Palindrome(string input)
@@ -24,10 +25,11 @@ public class Ohce
         stringBuilder.Append("votre mot : \n " + reversed);
 
         if (reversed.Equals(input))
-            stringBuilder.Append("Bien dit \n");
+            stringBuilder.Append("\n Bien dit \n");
 
         stringBuilder.Append("\n Aurevoir");
 
         return stringBuilder.ToString();
     }
+
 }

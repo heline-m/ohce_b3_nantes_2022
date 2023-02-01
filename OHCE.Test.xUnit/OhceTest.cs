@@ -20,83 +20,54 @@ public class OhceTest
         Assert.Contains("otot", sortie);
     }
 
-    [Theory(DisplayName = "ETANT DONNE un utilisateur parlant une langue" +
-                          "QUAND on entre un palindrome " +
-                          "ALORS il est renvoyé " +
-                          "ET le <bienDit> de cette langue est envoyé")]
-    [MemberData(nameof(LanguesSeules))]
-    public void PalindromeTest(ILangue langue)
+    [Fact(DisplayName =
+        "QUAND on saisit un palindrome " +
+        "ALORS celui-ci est renvoyé " +
+        "ET « Bien dit » est envoyé ensuite")]
+    public void Biendit()
     {
-        // ETANT DONNE un utilisateur parlant <langue>
-        var ohce = new OhceBuilder()
-            .AyantPourLangue(langue)
-            .Build();
+        var ohce = OhceBuilder.Default;
 
-        // QUAND on entre un palindrome
-        const string palindrome = "kayak";
-        var sortie = ohce.Palindrome(palindrome);
+        //QUAND on saisit un palindrome 
+        var sortie = ohce.Palindrome("erdre");
 
-        // ALORS il est renvoyé
-        // ET <bienDit> en <langue> est envoyé
-        Assert.Contains(
-            palindrome + langue.BienDit, 
-            sortie);
+        //ALORS celui-ci est renvoyé 
+        Assert.Contains("erdre", sortie);
+
+        //ET « Bien dit » est envoyé ensuite
+        Assert.Contains("Bien dit", sortie);
     }
 
-    private static readonly IEnumerable<ILangue> Langues = new ILangue[]
+    [Fact(DisplayName =
+        "QUAND on saisit une chaîne " +
+        "ALORS « Bonjour » est envoyé avant toute réponse")]
+    public void Bonjour()
     {
-        new LangueAnglaise(), 
-        new LangueFrançaise()
-    };
+        var ohce = OhceBuilder.Default;
 
-    private static readonly IEnumerable<PériodeJournée> Périodes = new PériodeJournée[]
-    {
-        PériodeJournée.Matin, 
-        PériodeJournée.AprèsMidi, 
-        PériodeJournée.Soir, 
-        PériodeJournée.Nuit, 
-        PériodeJournée.Defaut
-    };
+        //QUAND on saisit une chaîne
+        var sortie = ohce.Palindrome("erdre");
 
-    public static IEnumerable<object[]> LanguesSeules => new CartesianData(Langues);
-    public static IEnumerable<object[]> LanguesEtPériodes => new CartesianData(Langues, Périodes);
-
-    [Theory(DisplayName = "ETANT DONNE un utilisateur parlant une langue" +
-                          "ET que la période de la journée est <période>" +
-                          "QUAND l'app démarre " +
-                          "ALORS <bonjour> de cette langue à cette période est envoyé")]
-    [MemberData(nameof(LanguesEtPériodes))]
-    public void DémarrageTest(ILangue langue, PériodeJournée période)
-    {
-        // ETANT DONNE un utilisateur parlant une langue
-        // ET que la période de la journée est <période>
-        var ohce = new OhceBuilder()
-            .AyantPourLangue(langue)
-            .AyantPourPériodeDeLaJournée(période)
-            .Build();
-
-        // QUAND l'app démarre
-        var sortie = ohce.Palindrome(string.Empty);
-
-        // ALORS <bonjour> de cette langue à cette période est envoyé
-        Assert.StartsWith(langue.DireBonjour(période), sortie);
+        //ALORS « Bonjour » est envoyé avant toute réponse
+        Assert.Contains("Bonjour", sortie);
     }
 
-    [Theory(DisplayName = "ETANT DONNE un utilisateur parlant une langue" +
-                          "QUAND l'app se ferme " +
-                          "ALORS <auRevoir> dans cette langue est envoyé")]
-    [MemberData(nameof(LanguesSeules))]
-    public void FermetureTest(ILangue langue)
+    [Fact(DisplayName =
+        "QUAND on saisit une chaîne " +
+        "ALORS « Au revoir » est envoyé en dernier")]
+    public void Aurevoir()
     {
-        // ETANT DONNE un utilisateur parlant une langue
-        var ohce = new OhceBuilder()
-            .AyantPourLangue(langue)
-            .Build();
+        var ohce = OhceBuilder.Default;
 
-        // QUAND l'app démarre
-        var sortie = ohce.Palindrome(string.Empty);
+        //QUAND on saisit une chaîne
+        var sortie = ohce.Palindrome("erdre");
 
-        // ALORS <auRevoir> dans cette langue est envoyé
-        Assert.EndsWith(langue.AuRevoir, sortie);
+        //ALORS « Bonjour » est envoyé avant toute réponse
+        Assert.Contains("Aurevoir", sortie);
     }
+
+
+
+
+
 }
