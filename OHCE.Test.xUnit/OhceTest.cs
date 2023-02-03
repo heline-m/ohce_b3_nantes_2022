@@ -1,69 +1,72 @@
 using OHCE.Langues;
 using OHCE.Test.xUnit.Utilities;
 using OHCE.Test.xUnit.Utilities.Builders;
+using System;
 
 namespace OHCE.Test.xUnit;
 
 public class OhceTest
 {
-    [Fact(DisplayName = 
-        "QUAND on entre une chaîne de caractères " +
-        "ALORS elle est renvoyée en miroir")]
-    public void MiroirTest()
-    {
-        var ohce = OhceBuilder.Default;
 
-        // QUAND on entre une chaîne de caractère
-        var sortie = ohce.Palindrome("toto");
+    private static readonly IEnumerable<ILangue> Langues = new ILangue[]
+   {
+        new LangueAnglaise(),
+        new LangueFrançaise()
+   };
 
-        // ALORS elle est renvoyée en miroir
-        Assert.Contains("otot", sortie);
-    }
+    public static IEnumerable<object[]> LanguesSeules => new CartesianData(Langues);
 
-    [Fact(DisplayName =
+    [Theory(DisplayName =
+        "ETANT DONNE un utilisateur parlant une langue" +
         "QUAND on saisit un palindrome " +
         "ALORS celui-ci est renvoyé " +
-        "ET « Bien dit » est envoyé ensuite")]
-    public void Biendit()
+        "ET le « Bien dit » de cette langue est envoyé ensuite")]
+    [MemberData(nameof(LanguesSeules))]
+    public void PalindromeTest(ILangue langue)
     {
-        var ohce = OhceBuilder.Default;
+        //ETANT DONNE un utilisateur parlant une langue
+        var ohce = new OhceBuilder().AyantPourLangue(langue).Build();
 
         //QUAND on saisit un palindrome 
         var sortie = ohce.Palindrome("erdre");
 
         //ALORS celui-ci est renvoyé 
-        Assert.Contains("erdre", sortie);
-
-        //ET « Bien dit » est envoyé ensuite
-        Assert.Contains("Bien dit", sortie);
+        // ET le « Bien dit » de cette langue est envoyé ensuite
+        Assert.Contains(langue.VotreMot + "\n erdre\n" + langue.BienDit, sortie);
     }
 
-    [Fact(DisplayName =
+    [Theory(DisplayName =
+        "ETANT DONNE un utilisateur parlant une langue" +
         "QUAND on saisit une chaîne " +
-        "ALORS « Bonjour » est envoyé avant toute réponse")]
-    public void Bonjour()
+        "ALORS le « Bonjour » de cette langue est envoyé avant toute réponse")]
+    [MemberData(nameof(LanguesSeules))]
+    public void Bonjour(ILangue langue)
     {
-        var ohce = OhceBuilder.Default;
+        //ETANT DONNE un utilisateur parlant une langue
+        var ohce = new OhceBuilder().AyantPourLangue(langue).Build();
 
         //QUAND on saisit une chaîne
         var sortie = ohce.Palindrome("erdre");
 
-        //ALORS « Bonjour » est envoyé avant toute réponse
-        Assert.Contains("Bonjour", sortie);
+        //ALORS le « Bonjour » de cette langue est envoyé avant toute réponse
+        Assert.StartsWith(langue.Bonjour, sortie);
     }
 
-    [Fact(DisplayName =
+    [Theory(DisplayName =
+        "ETANT DONNE un utilisateur parlant une langue" +
         "QUAND on saisit une chaîne " +
-        "ALORS « Au revoir » est envoyé en dernier")]
-    public void Aurevoir()
+        "ALORS le « Au revoir » de cette langue est envoyé en dernier")]
+    [MemberData(nameof(LanguesSeules))]
+    public void Aurevoir(ILangue langue)
     {
-        var ohce = OhceBuilder.Default;
+        //ETANT DONNE un utilisateur parlant une langue
+        var ohce = new OhceBuilder().AyantPourLangue(langue).Build();
 
         //QUAND on saisit une chaîne
         var sortie = ohce.Palindrome("erdre");
 
-        //ALORS « Bonjour » est envoyé avant toute réponse
-        Assert.Contains("Aurevoir", sortie);
+        //"ALORS le « Au revoir » de cette langue est envoyé en dernier
+        Assert.EndsWith(langue.AuRevoir, sortie);
     }
 
 

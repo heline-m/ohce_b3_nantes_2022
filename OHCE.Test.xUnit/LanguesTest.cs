@@ -14,7 +14,7 @@ namespace OHCE.Test.xUnit
             var langue = new LangueFrançaise();
 
             // QUAND je dis bonjour
-            var salutation = langue.DireBonjour(période);
+            var salutation = langue.Bonjour;
 
             // ALORS on me répond <salutationAttendue>
             Assert.Equal(salutationAttendue, salutation);

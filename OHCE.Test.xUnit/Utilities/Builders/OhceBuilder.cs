@@ -9,7 +9,7 @@ namespace OHCE.Test.xUnit.Utilities.Builders
 
         public static Ohce Default => new OhceBuilder().Build();
 
-        public Ohce Build() => new Ohce();
+        public Ohce Build() => new Ohce(_langue);
         
         public OhceBuilder AyantPourLangue(ILangue langue)
         {
