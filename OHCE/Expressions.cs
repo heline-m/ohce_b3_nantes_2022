@@ -11,6 +11,7 @@ namespace OHCE
         public static class Français
         {
             public const string BienDit = "Bien dit";
+            public const string VotreMot = "Votre mot :";
             public const string Bonjour = "Bonjour";
             public const string AuRevoir = "Au revoir";
             public const string Bonsoir = "Bonsoir";
@@ -19,6 +20,7 @@ namespace OHCE
         public static class English
         {
             public const string BienDit = "Well said";
+            public const string VotreMot = "Your word :";
             public const string Bonjour = "Hello";
             public const string AuRevoir = "Goodbye";
         }
