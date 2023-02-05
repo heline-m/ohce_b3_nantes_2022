@@ -9,9 +9,30 @@
         public string VotreMot => Expressions.English.VotreMot;
 
         /// <inheritdoc />
-        public string Bonjour => Expressions.English.Bonjour;
+        public string Bonjour(PériodeJournée période)
+        {
+            if (période == PériodeJournée.Matin)
+            {
+                return Expressions.English.Bonjour;
+            }
+            else
+            {
+                return Expressions.English.Bonsoir;
+            }
+
+        }
 
         /// <inheritdoc />
-        public string AuRevoir => Expressions.English.AuRevoir;
+        public string AuRevoir(PériodeJournée période)
+        {
+            if (période == PériodeJournée.Matin)
+            {
+                return Expressions.English.AuRevoir;
+            }
+            else
+            {
+                return Expressions.English.BonneSoiree;
+            }
+        }
     }
 }
