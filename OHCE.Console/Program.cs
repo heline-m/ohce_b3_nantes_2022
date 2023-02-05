@@ -3,6 +3,9 @@ using OHCE.Langues;
 
 int choix = 0;
 ILangue langue;
+var choixPériode = 0;
+PériodeJournée période;
+
 
 while (choix!=1 && choix != 2)
 {
@@ -21,8 +24,26 @@ if (choix == 1)
     langue = new LangueAnglaise();
 }
 
-var ohce = new Ohce(langue);
 
-Console.WriteLine("Veuillez entrer un mot :");
+while (choixPériode != 1 && choixPériode != 2)
+{
+    Console.WriteLine("1/ Matin - Morning \n" +
+        "2/ Après-midi - Afternoon");
+    choixPériode = Int32.Parse(Console.ReadLine());
+}
+
+if (choixPériode == 1)
+{
+    période = PériodeJournée.Matin;
+}
+else
+{
+    période = PériodeJournée.Soir;
+}
+
+var ohce = new Ohce(langue, période);
+
+Console.WriteLine("Veuillez entrer un mot : \n" +
+    "Please enter a word :");
 String mot = Console.ReadLine();
 Console.WriteLine(ohce.Palindrome(mot));

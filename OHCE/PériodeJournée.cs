@@ -4,8 +4,6 @@
     {
         Defaut,
         Matin,
-        AprèsMidi,
         Soir,
-        Nuit
     }
 }

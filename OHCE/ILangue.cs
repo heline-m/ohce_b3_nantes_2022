@@ -4,7 +4,7 @@
     {
         string BienDit { get; }
         string VotreMot { get; }
-        string Bonjour { get; }
-        string AuRevoir { get; }
+        string Bonjour(PériodeJournée période);
+        string AuRevoir(PériodeJournée période);
     }
 }

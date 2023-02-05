@@ -9,9 +9,10 @@ public class Ohce
     private readonly ILangue _langue;
     private readonly PériodeJournée _périodeJournée;
 
-    public Ohce(ILangue langue)
+    public Ohce(ILangue langue, PériodeJournée période)
     {
         _langue = langue;
+        _périodeJournée = période;
     }
 
     public string Palindrome(string input)
@@ -35,7 +36,7 @@ public class Ohce
 
     public string Bonjour()
     {
-        return _langue.Bonjour;
+        return _langue.Bonjour(_périodeJournée);
     }
 
     public string Biendit()
@@ -50,7 +51,7 @@ public class Ohce
 
     public string Aurevoir()
     {
-        return _langue.AuRevoir;
+        return _langue.AuRevoir(_périodeJournée);
     }
 
 }
