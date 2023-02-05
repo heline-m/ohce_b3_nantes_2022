@@ -6,8 +6,8 @@
 
         public string VotreMot { get; init; } = string.Empty;
 
-        public string Bonjour { get; init; } = string.Empty; 
+        public string Bonjour(PériodeJournée période) => string.Empty; 
 
-        public string AuRevoir { get; init; } = string.Empty;
+        public string AuRevoir(PériodeJournée période) => string.Empty;
     }
 }
